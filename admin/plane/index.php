@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php
+	<?php
 	$servername = "localhost";
-$username = "localuser";
-$password = "tG88sAqC";
-$dbname = "airline";
-	$conn = new mysqli($servername, $username, $password, $dbname);
+	$username   = "localuser";
+	$password   = "tG88sAqC";
+	$dbname     = "airline";
+	$conn       = new mysqli($servername, $username, $password, $dbname);
 	?>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -29,25 +29,23 @@ $dbname = "airline";
 		<div class="row">
 			<label class="control-label col-sm-1" for="plane">Plane:</label>
 			<div class="col-sm-3">
-				<select class="form-control" id="plane" onChange="newPlane()">
+				<select class="form-control" id="plane" onchange="newPlane()">
 					<option value="new">
 						New Plane
-					</option>
-					<?php
-						$sql="SELECT pid, make, model FROM `airplanes`";
-						
-					$result=$conn->query($sql);
-					while($row = $result->fetch_assoc()){
-							echo("<option value=\"".$row["pid"]."\">#".$row["pid"].": ".$row["make"]." ".$row["model"]."</option>");
+					</option><?php
+					$sql = "SELECT pid, make, model FROM `airplanes`";
+
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["pid"] . "\">#" . $row["pid"] . ": " . $row["make"] . " " . $row["model"] . "</option>");
 					}
 					$conn->close();
-						?>
+					?>
 				</select>
 			</div>
 		</div>
 		<div style="padding-bottom: 20px"></div>
-		<div id="form">
-		</div>
+		<div id="form"></div>
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -99,49 +97,49 @@ $dbname = "airline";
 		</div><!-- /.container-fluid -->
 	</nav>
 	<script>
-		function newPlane(){
-			var value=document.getElementById("plane").value;
-			if(value==="new"){
-				runnew();
-			}else{
-				runupdate(value);	
-			}
-		}
-		function runnew(){
-			var xhttp;
-  if (window.XMLHttpRequest) {
-    // code for modern browsers
-    xhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("form").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "new.php", true);
-  xhttp.send();
-		}
-		function runupdate(value){
-			var xhttp;
-  if (window.XMLHttpRequest) {
-    // code for modern browsers
-    xhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("form").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "update.php?pid="+value, true);
-  xhttp.send();
-		}
-		runnew();
+	       function newPlane(){
+	           var value=document.getElementById("plane").value;
+	           if(value==="new"){
+	               runnew();
+	           }else{
+	               runupdate(value);   
+	           }
+	       }
+	       function runnew(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "new.php", true);
+	 xhttp.send();
+	       }
+	       function runupdate(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "update.php?pid="+value, true);
+	 xhttp.send();
+	       }
+	       runnew();
 	</script>
 </body>
 </html>

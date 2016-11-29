@@ -20,235 +20,14 @@
 	<div class="container">
 		<h2>Update Staff</h2>
 		<div style="padding-bottom: 20px">
-			Is this a new Staff Member? <button class="btn btn-success" type="button">Yes</button> <button class="btn btn-danger" type="button">No</button><br>
+			Is this a new Staff Member? <button class="btn btn-success" onclick="hideexisting()" type="button">Yes</button> <button class="btn btn-danger" onclick="showexisting()" type="button">No</button><br>
 		</div>
-		<div id="returning">
-			<label for="usr">Staff Name:</label> <input class="form-control" id="namesearch" type="text" oninput="updatestaff()">
+		<div id="returning" style="display: none">
+			<label for="usr">Staff Name:</label> <input class="form-control" id="namesearch" oninput="lookforstaff()" type="text">
 			<div style="padding-top: 20px"></div>
-			<div id="stafflist">
-			</div>
+			<div id="stafflist"></div>
 		</div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="name">Name:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="name" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="Datepicker1">DOB:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="Datepicker1" type="text">
-				</div><label class="control-label col-sm-1" for="sex">Sex:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="sex">
-						<option>
-							Male
-						</option>
-						<option>
-							Female
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="weight">Weight:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="weight" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="address1">Address Line 1:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="address1" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="address2">Address Line 2:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="address2" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="city">City</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="city" type="text">
-				</div><label class="control-label col-sm-1" for="state">State:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="state">
-						<option>
-							AL
-						</option>
-						<option>
-							AK
-						</option>
-						<option>
-							AZ
-						</option>
-						<option>
-							AR
-						</option>
-						<option>
-							CA
-						</option>
-						<option>
-							CO
-						</option>
-						<option>
-							CT
-						</option>
-						<option>
-							DE
-						</option>
-						<option>
-							FL
-						</option>
-						<option>
-							GA
-						</option>
-						<option>
-							HI
-						</option>
-						<option>
-							ID
-						</option>
-						<option>
-							IL
-						</option>
-						<option>
-							IN
-						</option>
-						<option>
-							IA
-						</option>
-						<option>
-							KS
-						</option>
-						<option>
-							KY
-						</option>
-						<option>
-							LA
-						</option>
-						<option>
-							ME
-						</option>
-						<option>
-							MD
-						</option>
-						<option>
-							MA
-						</option>
-						<option>
-							MI
-						</option>
-						<option>
-							MN
-						</option>
-						<option>
-							MS
-						</option>
-						<option>
-							MO
-						</option>
-						<option>
-							MT
-						</option>
-						<option>
-							NE
-						</option>
-						<option>
-							NV
-						</option>
-						<option>
-							NH
-						</option>
-						<option>
-							NJ
-						</option>
-						<option>
-							NM
-						</option>
-						<option>
-							NY
-						</option>
-						<option>
-							NC
-						</option>
-						<option>
-							ND
-						</option>
-						<option>
-							OH
-						</option>
-						<option>
-							OK
-						</option>
-						<option>
-							OR
-						</option>
-						<option>
-							PA
-						</option>
-						<option>
-							RI
-						</option>
-						<option>
-							SC
-						</option>
-						<option>
-							SD
-						</option>
-						<option>
-							TN
-						</option>
-						<option>
-							TX
-						</option>
-						<option>
-							UT
-						</option>
-						<option>
-							VT
-						</option>
-						<option>
-							VA
-						</option>
-						<option>
-							WA
-						</option>
-						<option>
-							WV
-						</option>
-						<option>
-							WI
-						</option>
-						<option>
-							WY
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="zip">Zip:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="zip" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="phone">Phone Number:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="phone" type="tel">
-				</div><label class="control-label col-sm-1" for="email">Email:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="email" type="email">
-				</div><label class="control-label col-sm-1" for="homeairport">Home Airport:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="homeairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
-					</select>
-				</div>
-			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
-		</form>
+		<div id="form"></div>
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -300,33 +79,75 @@
 		</div><!-- /.container-fluid -->
 	</nav>
 	<script>
-		
-		var sid=0;
-		function selectNumber(number){
-			sid=number;
-			alert(number);
-		}
-	function updatestaff(){
-		var name=document.getElementById("namesearch").value;
-		runupdate(name);
-	}
-		function runupdate(value){
-			var xhttp;
-  if (window.XMLHttpRequest) {
-    // code for modern browsers
-    xhttp = new XMLHttpRequest();
-    } else {
-    // code for IE6, IE5
-    xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("stafflist").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "findstaff.php?name="+value, true);
-  xhttp.send();
-	}
+	       
+	       var sid=0;
+	       function selectNumber(number){
+	           sid=number;
+	           updatestaff(number);
+	       }
+	       function updatestaff(sid){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "update.php?sid="+sid, true);
+	 xhttp.send();
+	       }
+	       function newstaff(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "new.php", true);
+	 xhttp.send();
+	       }
+	   function lookforstaff(){
+	       var name=document.getElementById("namesearch").value;
+	       runsearch(name);
+	   }
+	       function runsearch(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("stafflist").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findstaff.php?name="+value, true);
+	 xhttp.send();
+	   }
+	       function showexisting(){
+	           $("#returning").slideDown();
+	       }
+	       function hideexisting(){
+	           $("#returning").slideUp();
+	           newstaff();
+	       }
+	       newstaff();
 	</script>
 </body>
 </html>
