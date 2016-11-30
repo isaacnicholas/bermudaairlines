@@ -18,61 +18,15 @@
 </head>
 <body style="padding-top: 70px">
 	<div class="container">
-		<h2>Update Pay</h2><label for="usr">Staff Name:</label> <input class="form-control" id="namesearch" type="text">
+		<h2>Update Pay</h2><label for="usr">Staff Name:</label> <input class="form-control" id="namesearch" oninput="lookforstaff()" type="text">
 		<div class="radio">
-			<table border="1" width="100%">
-				<tbody>
-					<tr>
-						<th scope="col">Name</th>
-						<th scope="col">Home Airport</th>
-						<th scope="col">Address</th>
-						<th scope="col">Phone Number</th>
-					</tr>
-					<tr>
-						<td><label><input name="optradio" type="radio">My Name Goes Here</label></td>
-						<td>Home Airport</td>
-						<td>Address</td>
-						<td>1021021022</td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="stafflist"></div>
 		</div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="wage">Wage:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="wage" type="number">
-				</div><label class="control-label col-sm-1" for="hours">Hours:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="hours" type="number">
-				</div><label class="control-label col-sm-1" for="weight">Time:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="weight" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="method">Method:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="method">
-						<option>
-							Check
-						</option>
-						<option>
-							Direct Deposit
-						</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group" id="directdeposit">
-				<label class="control-label col-sm-1" for="accnum">Account Number:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="accbum" type="number">
-				</div><label class="control-label col-sm-1" for="routenum">Route Number:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="routenum" type="number">
-				</div>
-			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
-		</form>
+		<div id="pay">
+		</div>
+		<div style="padding-top: 20px"></div>
+		<div id="form">
+		</div>
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -123,5 +77,95 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	<script>
+		var sid=0;
+	       function selectStaffNumber(number){
+	           sid=number;
+	           searchpay(number);
+	       }
+		var payid=0;
+	       function selectPayNumber(number){
+	           payid=number;
+			   if(payid==0){
+				   newpay();
+			   }
+	           updatepay(number);
+	       }
+		function searchpay(sid){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("pay").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findpay.php?sid="+sid, true);
+	 xhttp.send();
+	       }
+		function updatepay(sid){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "update.php?sid="+sid, true);
+	 xhttp.send();
+	       }
+		function newpay(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "new.php?sid="+sid, true);
+	 xhttp.send();
+	       }
+		function lookforstaff(){
+	       var name=document.getElementById("namesearch").value;
+	       runsearch(name);
+	   }
+	       function runsearch(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("stafflist").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findstaff.php?name="+value, true);
+	 xhttp.send();
+	   }
+	</script>
 </body>
 </html>
+<?php
+			$conn->close();
+		?>
