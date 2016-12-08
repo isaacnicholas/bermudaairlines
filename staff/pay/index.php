@@ -163,9 +163,14 @@
 	 xhttp.open("GET", "findstaff.php?name="+value, true);
 	 xhttp.send();
 	   }
+	   			function checkmethod(){
+				name=document.getElementById("method").value;
+				if(name=="Check"){
+					$("#directdeposit").slideUp();
+				}else{
+					 $("#directdeposit").slideDown(); 
+					  }
+			}
 	</script>
 </body>
 </html>
-<?php
-			$conn->close();
-		?>

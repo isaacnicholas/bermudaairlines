@@ -195,3 +195,6 @@ $dbname = "airline";
 				</div>
 			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
 		</form> 
+		<?php
+			$conn->close();
+		?>

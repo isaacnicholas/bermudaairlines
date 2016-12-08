@@ -41,3 +41,6 @@ $dbname = "airline";
 			var element = document.getElementById('state');
     element.value = <?php echo($row["state"])?>;
 </script>
+<?php
+			$conn->close();
+		?>

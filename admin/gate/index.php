@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$servername = "localhost";
+$username   = "localuser";
+$password   = "tG88sAqC";
+$dbname     = "airline";
+$conn       = new mysqli($servername, $username, $password, $dbname);
+?>
 <head>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -20,44 +27,31 @@
 	<div class="container">
 		<h2>Update Gates</h2>
 		<div class="row">
-			<label class="control-label col-sm-1" for="airport">Airport:</label>
+			<label class="control-label col-sm-1">Airport:</label>
 			<div class="col-sm-3">
-				<select class="form-control" id="airport">
-					<option>
-						Airport 1
-					</option>
-					<option>
-						Airport 2
-					</option>
+				<select class="form-control" id="airport" onChange="newAirport()">
+					<?php
+					$sql    = "SELECT aid, name FROM airport";
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
+					}
+					$conn->close();
+					?>
 				</select>
 			</div>
 		</div>
 		<div style="padding-top: 20px"></div>
 		<div class="row">
-			<label class="control-label col-sm-1" for="gate">Gate:</label>
+			<label class="control-label col-sm-1">Gate:</label>
 			<div class="col-sm-3">
-				<select class="form-control" id="gate">
-					<option>
-						Add Gate
-					</option>
-					<option>
-						Gate 1
-					</option>
-					<option>
-						Gate 2
-					</option>
-				</select>
+				<div id="gates">
+					</div>
 			</div>
 		</div>
 		<div style="padding-top: 20px"></div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="name">Name:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="name" type="text">
-				</div>
-			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
-		</form>
+		<div id="form">
+		</div>
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -108,5 +102,75 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	<script>
+	var aid;
+	newAirport();
+	function newAirport(){
+	           var value=document.getElementById("airport").value;
+			aid=value;
+	          getgates(value);
+			runnew();
+	       }
+	function getgates(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("gates").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "getgates.php?aid="+value, true);
+	 xhttp.send();
+	       }
+		function newGate(){
+	           var value=document.getElementById("gate").value;
+	           if(value==="new"){
+	               runnew();
+	           }else{
+	               runupdate(value);   
+	           }
+	       }
+	       function runnew(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "new.php?aid="+aid, true);
+	 xhttp.send();
+	       }
+	       function runupdate(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "update.php?gid="+value, true);
+	 xhttp.send();
+	       }
+	       newAirport();
+	</script>
 </body>
 </html>

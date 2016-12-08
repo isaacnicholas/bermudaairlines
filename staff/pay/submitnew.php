@@ -8,7 +8,7 @@ $sid=$_GET["sid"];
 $sql = "INSERT INTO `payroll`(`sid`, `wage`, `hours`, `time`, `payType`, `accNum`, `routeNum`) VALUES ('".$sid."','".$_POST["wage"]."','".$_POST["hours"]."','".$_POST["time"]."','".$_POST["method"]."','".$_POST["accnum"]."','".$_POST["routenum"]."')";
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-	header('Location: https://vps101733.vps.ovh.ca/bermudaair/staff/staff/');
+	header('Location: https://vps101733.vps.ovh.ca/bermudaair/staff/pay/');
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 	echo "Please go back and try again";

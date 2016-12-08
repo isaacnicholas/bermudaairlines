@@ -5,7 +5,8 @@ $password = "tG88sAqC";
 $dbname = "airline";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sid=$_GET["sid"];
-	$sql="SELECT staff.sid, staff.name, staff.position, staff.dob, staff.sex, staff.weight, staff.state, staff.city, staff.zip, staff.address1, staff.address2, staff.phone, staff.email, staff.homeAirport airport.name AS aname FROM `staff`, `airport` WHERE staff.homeAirport=airport.aid AND staff.sid=".sid;
+	$sql="SELECT staff.sid, staff.name, staff.position, staff.dob, staff.sex, staff.weight, 
+	staff.state, staff.city, staff.zip, staff.address1, staff.address2, staff.phone, staff.email, staff.homeAirport, airport.name AS aname FROM `staff`, `airport` WHERE staff.homeAirport=airport.aid AND staff.sid=".$sid;
 	$result=$conn->query($sql);
 	$row = $result->fetch_assoc();
 	?>
@@ -260,3 +261,6 @@ $dbname = "airline";
 				</div>
 			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
 		</form>
+		<?php
+			$conn->close();
+		?>

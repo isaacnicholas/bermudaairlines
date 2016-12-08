@@ -43,7 +43,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 				</select>
 			</div><label class="control-label col-sm-1">DOB:</label>
 			<div class="col-sm-2">
-				<input class="form-control" id="Datepicker1" name="dob" type="text">
+				<input class="form-control" name="dob" type="date">
 			</div><label class="control-label col-sm-1">Sex:</label>
 			<div class="col-sm-2">
 				<select class="form-control" id="sex" name="sex">
@@ -259,3 +259,6 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 	</form>
 </body>
 </html>
+<?php
+			$conn->close();
+		?>

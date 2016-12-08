@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$servername = "localhost";
+$username   = "localuser";
+$password   = "tG88sAqC";
+$dbname     = "airline";
+$conn       = new mysqli($servername, $username, $password, $dbname);
+?>
 <head>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -30,44 +37,32 @@
 			<div class="form-group">
 				<label class="control-label col-sm-1" for="departureairport">Departure Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="departureairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
+					<select class="form-control" id="departureairport" onChange="getDepartGates()">
+					<?php
+					$sql    = "SELECT aid, name FROM airport";
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
+					}
+					$conn->close();
+					?>
 					</select>
 				</div><label class="control-label col-sm-1" for="departuregate">Departure Gate:</label>
-				<div class="col-sm-1">
-					<select class="form-control" id="departuregate">
-						<option>
-							1
-						</option>
-						<option>
-							2
-						</option>
-					</select>
+				<div class="col-sm-1" id="departuregates">
 				</div><label class="control-label col-sm-1" for="arrivalairport">Arrival Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="arrivalairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
+					<select class="form-control" id="arrivalairport" onChange="getArriveGates">
+					<?php
+					$sql    = "SELECT aid, name FROM airport";
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
+					}
+					$conn->close();
+					?>
 					</select>
 				</div><label class="control-label col-sm-1" for="arrivalegate">Arrival Gate:</label>
-				<div class="col-sm-1">
-					<select class="form-control" id="arrivalegate">
-						<option>
-							1
-						</option>
-						<option>
-							2
-						</option>
-					</select>
+				<div class="col-sm-1" id="arrivalgates">
 				</div>
 			</div>
 			<div class="form-group">
@@ -92,16 +87,16 @@
 			<div class="form-group">
 				<label class="control-label col-sm-1" for="pilot">Departure Date:</label>
 				<div class="col-sm-2">
-					<input id="Datepicker1" type="text">
+					<input class="form-control" type="date">
 				</div><label class="control-label col-sm-1" for="copilot">Departure Time:</label>
 				<div class="col-sm-2">
-					<input type="time">
+					<input class="form-control" type="time">
 				</div><label class="control-label col-sm-1" for="steward">Arrival Date:</label>
 				<div class="col-sm-2">
-					<input id="Datepicker2" type="text">
+					<input class="form-control" type="text">
 				</div><label class="control-label col-sm-1" for="steward2">Arrival Time:</label>
 				<div class="col-sm-2">
-					<input type="time">
+					<input class="form-control" type="time">
 				</div>
 			</div>
 			<div class="col-sm-12">
@@ -201,13 +196,49 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	<script type="text/javascript">
-	   $(function() {
-	      $( "#Datepicker1" ).datepicker(); 
-	   });
-	   $(function() {
-	      $( "#Datepicker2" ).datepicker(); 
-	   });
+	<script>
+		function getDepartGates(){
+			var value=Document.getElementById("departureairport").value;
+			populatedepart(value);
+		}
+		function getArriveGates(){
+			var value=Document.getElementById("arrivalairport").value;
+			populatearrival(value);
+		}
+			function populatedepart(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("departuregates").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "departuregate.php?aid="+value, true);
+	 xhttp.send();
+	       }
+			function populatearrival(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("arrivalgates").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "arrivalgate.php?aid="+value, true);
+	 xhttp.send();
+	       }
 	</script>
 </body>
 </html>

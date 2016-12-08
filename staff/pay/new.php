@@ -41,7 +41,7 @@ $dbname = "airline";
 					</select>
 				</div>
 			</div>
-			<div class="form-group" id="directdeposit" style="display: none">
+			<div class="form-group" id="directdeposit">
 				<label class="control-label col-sm-1">Account Number:</label>
 				<div class="col-sm-3">
 					<input class="form-control" name="accnum" type="number">
@@ -51,16 +51,6 @@ $dbname = "airline";
 				</div>
 			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
 		</form>
-		<script>
-			function checkmethod(){
-				name=document.getElementById("method").value;
-				if(name=="Check"){
-					$("#directdeposit").slideUp();
-				}else{
-					 $("#directdeposit").slideDown(); 
-					  }
-			}
-		</script>
 		<?php
 			$conn->close();
 		?>

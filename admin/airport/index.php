@@ -142,3 +142,6 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 	</script>
 </body>
 </html>
+<?php
+			$conn->close();
+		?>

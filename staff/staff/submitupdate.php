@@ -5,7 +5,9 @@ $password   = "tG88sAqC";
 $dbname     = "airline";
 $sid        = $_GET['sid'];
 $conn       = new mysqli($servername, $username, $password, $dbname);
-$sql        = "UPDATE `staff` SET `name`='" . $_POST['name'] . "',`position`='" . $_POST['position'] . "',`dob`='" . $_POST['dob'] . "'],`sex`='" . $_POST['sex'] . "',`weight`='" . $_POST['weight'] . "',`state`='" . $_POST['state'] . "',`city`='" . $_POST['city'] . "',`zip`='" . $_POST['zip'] . "',`address1`='" . $_POST['address1'] . "',`address2`='" . $_POST['address2'] . "',`phone`='" . $_POST['phone'] . "',`email`='" . $_POST['email'] . "',`homeAirport`='" . $_POST['homeAirport'] . "' WHERE sid=" . $sid;
+$sql        = "UPDATE `staff` SET `name`='" . $_POST['name'] . "',`position`='" . $_POST['position'] . 
+"',`dob`='" . $_POST['dob'] . "',`sex`='" . $_POST['sex'] . "',`weight`='" . $_POST['weight'] . 
+"',`state`='" . $_POST['state'] . "',`city`='" . $_POST['city'] . "',`zip`='" . $_POST['zip'] . "',`address1`='" . $_POST['address1'] . "',`address2`='" . $_POST['address2'] . "',`phone`='" . $_POST['phone'] . "',`email`='" . $_POST['email'] . "',`homeAirport`='" . $_POST['homeairport'] . "' WHERE sid=" . $sid;
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
     header('Location: https://vps101733.vps.ovh.ca/bermudaair/staff/staff/');
