@@ -1,16 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
 <?php
 	$servername = "localhost";
 $username = "localuser";
 $password = "tG88sAqC";
 $dbname = "airline";
 	$conn = new mysqli($servername, $username, $password, $dbname);
-	$sid=$_GET["sid"];
-	$sql="SELECT staff.sid, staff.name, staff.position, staff.dob, staff.sex, staff.weight, 
-	staff.state, staff.city, staff.zip, staff.address1, staff.address2, staff.phone, staff.email, staff.homeAirport, airport.name AS aname FROM `staff`, `airport` WHERE staff.homeAirport=airport.aid AND staff.sid=".$sid;
+	$cid=$_GET["cid"];
+	$sql="SELECT c.cid, c.name, c.dob, c.sex, c.weight, c.state, c.city, c.zip, c.address, c.address2, c.phone, c.email, a.name, c.payment, c.diet FROM `customers` c, `airport` a WHERE 1 AND  c.custHome=a.aid AND c.cid=".$cid;
 	$result=$conn->query($sql);
 	$row = $result->fetch_assoc();
 	?>
-	<form action="submitupdate.php?sid=<?php echo($sid)?>" class="form-horizontal" method="post">
+<body><form class="form-horizontal" action="submitnew.php" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-1" >Name:</label>
 				<div class="col-sm-11">
@@ -18,35 +23,12 @@ $dbname = "airline";
 				</div>
 			</div>
 			<div class="form-group">
-			<label class="control-label col-sm-1">Position:</label>
-			<div class="col-sm-2">
-					<select class="form-control" id="position" name="position">
-						<option <?php if(!strcmp($row["position"],"steward")){echo ("selected=\"\"");}?>>
-							steward
-						</option>
-						<option <?php if(!strcmp($row["position"],"janitor")){echo ("selected=\"\"");}?>>
-							janitor
-						</option>
-						<option <?php if(!strcmp($row["position"],"copilot")){echo ("selected=\"\"");}?>>
-							copilot
-						</option>
-						<option <?php if(!strcmp($row["position"],"secretary")){echo ("selected=\"\"");}?>>
-							secretary
-						</option>
-						<option <?php if(!strcmp($row["position"],"pilot")){echo ("selected=\"\"");}?>>
-							pilot
-						</option>
-						<option <?php if(!strcmp($row["position"],"security")){echo ("selected=\"\"");}?>>
-							security
-						</option>
-					</select>
-				</div>
 				<label class="control-label col-sm-1">DOB:</label>
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<input class="form-control" id="Datepicker1" name="dob" type="text" value="<?php echo($row["dob"])?>">
 				</div><label class="control-label col-sm-1">Sex:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="sex" name="sex">
+				<div class="col-sm-3">
+					<select class="form-control" name="sex">
 						<option value="M" <?php if(!strcmp($row["sex"],"M")){echo ("selected=\"\"");}?>>
 							Male
 						</option>
@@ -55,7 +37,7 @@ $dbname = "airline";
 						</option>
 					</select>
 				</div><label class="control-label col-sm-1">Weight:</label>
-				<div class="col-sm-2">
+				<div class="col-sm-3">
 					<input class="form-control" name="weight" type="number" value="<?php echo($row["weight"])?>">
 				</div>
 			</div>
@@ -72,12 +54,12 @@ $dbname = "airline";
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-1">City</label>
+				<label class="control-label col-sm-1">City:</label>
 				<div class="col-sm-3">
 					<input class="form-control" name="city" type="text" value="<?php echo($row["city"])?>">
 				</div><label class="control-label col-sm-1">State:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="state" name="state">
+					<select class="form-control" name="state">
 						<option <?php if(!strcmp($row["state"],"AL")){echo ("selected=\"\"");}?>>
 							AL
 						</option>
@@ -243,8 +225,8 @@ $dbname = "airline";
 					<input class="form-control" name="email" type="email" value="<?php echo($row["email"])?>">
 				</div><label class="control-label col-sm-1">Home Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" name="homeairport" id="homeairport">
-					<?php
+					<select class="form-control" name="homeairport">
+						<?php
 						$sql = "SELECT aid, name FROM airport";
 							$result=$conn->query($sql);
 							while($row2 = $result->fetch_assoc()){
@@ -259,8 +241,17 @@ $dbname = "airline";
 						?>
 					</select>
 				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-1">Payment Method:</label>
+				<div class="col-sm-5">
+					<input class="form-control" name="payment" type="text" value="<?php echo($row["payment"])?>">
+				</div>
+				<label class="control-label col-sm-1">Diet:</label>
+				<div class="col-sm-5">
+					<input class="form-control" name="diet" type="text" value="<?php echo($row["diet"])?>">
+				</div>
 			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
 		</form>
-		<?php
-			$conn->close();
-		?>
+</body>
+</html>

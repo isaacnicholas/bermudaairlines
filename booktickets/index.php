@@ -31,256 +31,16 @@
 	<div class="container">
 		<h2>Book Tickets</h2>
 		<div style="padding-bottom: 20px">
-			Is this a new Customer? <button class="btn btn-success" type="button">Yes</button> <button class="btn btn-danger" type="button">No</button><br>
+			Is this a new Customer? <button class="btn btn-success" onclick="hideexisting()" type="button">Yes</button> <button class="btn btn-danger" onclick="showexisting()" type="button">No</button><br><br>
 		</div>
 		<div id="returning">
-			<label for="usr">Customer Name:</label> <input class="form-control" id="namesearch" type="text">
-			<div class="radio">
-				<table border="1" width="100%">
-					<tbody>
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Home Airport</th>
-							<th scope="col">Address</th>
-							<th scope="col">Phone Number</th>
-						</tr>
-						<tr>
-							<td><label><input name="optradio" type="radio">My Name Goes Here</label></td>
-							<td>Home Airport</td>
-							<td>Address</td>
-							<td>1021021022</td>
-						</tr>
-					</tbody>
-				</table>
+			<label for="usr">Customer Name:</label> <input class="form-control" id="namesearch" type="text" onChange="lookforcustomers()">
+			<div id="customerslist">
 			</div>
 		</div>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="name">Name:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="name" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="Datepicker1">DOB:</label>
-				<div class="col-sm-3">
-					<input id="Datepicker1" type="text">
-				</div><label class="control-label col-sm-1" for="sex">Sex:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="sex">
-						<option>
-							Male
-						</option>
-						<option>
-							Female
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="weight">Weight:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="weight" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="address1">Address Line 1:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="address1" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="address2">Address Line 2:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="address2" type="text">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="city">City</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="city" type="text">
-				</div><label class="control-label col-sm-1" for="state">State:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="state">
-						<option>
-							AL
-						</option>
-						<option>
-							AK
-						</option>
-						<option>
-							AZ
-						</option>
-						<option>
-							AR
-						</option>
-						<option>
-							CA
-						</option>
-						<option>
-							CO
-						</option>
-						<option>
-							CT
-						</option>
-						<option>
-							DE
-						</option>
-						<option>
-							FL
-						</option>
-						<option>
-							GA
-						</option>
-						<option>
-							HI
-						</option>
-						<option>
-							ID
-						</option>
-						<option>
-							IL
-						</option>
-						<option>
-							IN
-						</option>
-						<option>
-							IA
-						</option>
-						<option>
-							KS
-						</option>
-						<option>
-							KY
-						</option>
-						<option>
-							LA
-						</option>
-						<option>
-							ME
-						</option>
-						<option>
-							MD
-						</option>
-						<option>
-							MA
-						</option>
-						<option>
-							MI
-						</option>
-						<option>
-							MN
-						</option>
-						<option>
-							MS
-						</option>
-						<option>
-							MO
-						</option>
-						<option>
-							MT
-						</option>
-						<option>
-							NE
-						</option>
-						<option>
-							NV
-						</option>
-						<option>
-							NH
-						</option>
-						<option>
-							NJ
-						</option>
-						<option>
-							NM
-						</option>
-						<option>
-							NY
-						</option>
-						<option>
-							NC
-						</option>
-						<option>
-							ND
-						</option>
-						<option>
-							OH
-						</option>
-						<option>
-							OK
-						</option>
-						<option>
-							OR
-						</option>
-						<option>
-							PA
-						</option>
-						<option>
-							RI
-						</option>
-						<option>
-							SC
-						</option>
-						<option>
-							SD
-						</option>
-						<option>
-							TN
-						</option>
-						<option>
-							TX
-						</option>
-						<option>
-							UT
-						</option>
-						<option>
-							VT
-						</option>
-						<option>
-							VA
-						</option>
-						<option>
-							WA
-						</option>
-						<option>
-							WV
-						</option>
-						<option>
-							WI
-						</option>
-						<option>
-							WY
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="zip">Zip:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="zip" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="phone">Phone Number:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="phone" type="tel">
-				</div><label class="control-label col-sm-1" for="email">Email:</label>
-				<div class="col-sm-3">
-					<input class="form-control" id="email" type="email">
-				</div><label class="control-label col-sm-1" for="homeairport">Home Airport:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="homeairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="payment">Payment Method:</label>
-				<div class="col-sm-11">
-					<input class="form-control" id="payment" type="text">
-				</div>
-			</div><button class="btn btn-primary" type="submit">Submit/Update</button>
-		</form>
+		<div id="form">
+		</div>
+		
 		<div style="padding-top: 20px">
 			<div class="control-label col-sm-12">
 				<h2>Select Flight</h2>
@@ -405,16 +165,83 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	<script type="text/javascript">
-	   $(function() {
-	      $( "#Dialog1" ).dialog(); 
-	   });
-	   $(function() {
-	      $( "#Datepicker1" ).datepicker(); 
-	   });
-	   $(function() {
-	      $( "#Datepicker2" ).datepicker(); 
-	   });
+	<script>
+		<?php
+			if($_GET["cid"]){
+					echo("start(".$_GET["cid"].")");
+			}
+		?>
+		function start(cid){
+			selectNumber(cid);
+			updatecustomers(cid);
+		}
+		 var cid=0;
+	       function selectNumber(number){
+	           cid=number;
+	           updatecustomers(number);
+	       }
+	       function updatecustomers(cid){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "update.php?cid="+cid, true);
+	 xhttp.send();
+	       }
+	       function newcustomer(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("form").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "new.php", true);
+	 xhttp.send();
+	       }
+	   function lookforcustomers(){
+	       var name=document.getElementById("namesearch").value;
+	       runsearch(name);
+	   }
+	       function runsearch(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("customerslist").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findcustomers.php?name="+value, true);
+	 xhttp.send();
+	   }
+	       function showexisting(){
+	           $("#returning").slideDown();
+	       }
+	       function hideexisting(){
+	           $("#returning").slideUp();
+	           newcustomer();
+	       }
 	</script>
 </body>
 </html>

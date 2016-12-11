@@ -33,117 +33,80 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 <body style="padding-top: 70px">
 	<div class="container">
 		<h2>Create Flight</h2>
-		<form class="form-horizontal">
+		<form class="form-horizontal" action="submit.php" method="post">
 			<div class="form-group">
-				<label class="control-label col-sm-1" for="departureairport">Departure Airport:</label>
+				<label class="control-label col-sm-1">Departure Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="departureairport" onChange="getDepartGates()">
+					<select class="form-control" name="departureairport" id="departureairport" onChange="getDepartGates()">
 					<?php
 					$sql    = "SELECT aid, name FROM airport";
 					$result = $conn->query($sql);
 					while ($row = $result->fetch_assoc()) {
 					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
 					}
-					$conn->close();
 					?>
 					</select>
-				</div><label class="control-label col-sm-1" for="departuregate">Departure Gate:</label>
+				</div><label class="control-label col-sm-1">Departure Gate:</label>
 				<div class="col-sm-1" id="departuregates">
-				</div><label class="control-label col-sm-1" for="arrivalairport">Arrival Airport:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="arrivalairport" onChange="getArriveGates">
+				</div><label class="control-label col-sm-1">Arrival Airport:</label>
+				<div class="col-sm-1">
+					<select class="form-control" name="arrivalairport" id="arrivalairport" onChange="getArriveGates()">
 					<?php
 					$sql    = "SELECT aid, name FROM airport";
 					$result = $conn->query($sql);
 					while ($row = $result->fetch_assoc()) {
 					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
 					}
-					$conn->close();
 					?>
 					</select>
-				</div><label class="control-label col-sm-1" for="arrivalegate">Arrival Gate:</label>
+				</div><label class="control-label col-sm-1">Arrival Gate:</label>
 				<div class="col-sm-1" id="arrivalgates">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-1" for="plane">Plane:</label>
+				<label class="control-label col-sm-1">Plane:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="plane">
-						<option>
-							Plane 1
-						</option>
-						<option>
-							Plane 2
-						</option>
+					<select class="form-control" name="plane">
+					<?php
+					$sql = "SELECT pid, make, model FROM `airplanes`";
+
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["pid"] . "\">#" . $row["pid"] . ": " . $row["make"] . " " . $row["model"] . "</option>");
+					}
+					?>
 					</select>
-				</div><label class="control-label col-sm-2" for="economy">Economy Price:</label>
-				<div class="col-sm-2">
-					<input class="form-control" id="economy" type="number">
-				</div><label class="control-label col-sm-2" for="firstclass">First Class Price:</label>
-				<div class="col-sm-2">
-					<input class="form-control" id="firstclass" type="number">
-				</div>
+				</div><label class="control-label col-sm-2">Economy Price:</label>
+				<div class="col-sm-2"><div class="input-group">
+					<span class="input-group-addon">
+						  $</span>
+					<input class="form-control" name="economy" type="number">
+					</div></div><label class="control-label col-sm-2">First Class Price:</label>
+				<div class="col-sm-2"><div class= "input-group">
+					<span class="input-group-addon">
+						  $</span><input class="form-control" name="firstclass" type="number">
+					</div></div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-1" for="pilot">Departure Date:</label>
+				<label class="control-label col-sm-1">Departure Date:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="date">
+					<input class="form-control" type="date" name="departdate">
 				</div><label class="control-label col-sm-1" for="copilot">Departure Time:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="time">
+					<input class="form-control" type="time" name="departtime">
 				</div><label class="control-label col-sm-1" for="steward">Arrival Date:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="text">
+					<input class="form-control" type="text" name="arrivedate">
 				</div><label class="control-label col-sm-1" for="steward2">Arrival Time:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="time">
+					<input class="form-control" type="time" name="arrivedate">
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<h3>Staff</h3>
 			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="pilot">Pilot:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="pilot">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="copilot">Co-Pilot:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="copilot">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="steward">Steward:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="steward">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="steward2">Steward 2:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="steward2">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div>
+			<div id="staff" class="form-group">
+				
 			</div><button class="btn btn-default" type="submit">Submit</button>
 		</form>
 	</div>
@@ -198,11 +161,12 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 	</nav>
 	<script>
 		function getDepartGates(){
-			var value=Document.getElementById("departureairport").value;
+			var value=document.getElementById("departureairport").value;
 			populatedepart(value);
+			populatestaff(value);
 		}
 		function getArriveGates(){
-			var value=Document.getElementById("arrivalairport").value;
+			var value=document.getElementById("arrivalairport").value;
 			populatearrival(value);
 		}
 			function populatedepart(value){
@@ -239,6 +203,25 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 	 xhttp.open("GET", "arrivalgate.php?aid="+value, true);
 	 xhttp.send();
 	       }
+		function populatestaff(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("staff").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "staff.php?aid="+value, true);
+	 xhttp.send();
+	       }
+		getDepartGates();
+		getArriveGates();
 	</script>
 </body>
 </html>

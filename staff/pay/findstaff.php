@@ -21,7 +21,7 @@
 			    $password   = "tG88sAqC";
 			    $dbname     = "airline";
 			    $conn       = new mysqli($servername, $username, $password, $dbname);
-			    $sql        = "SELECT staff.sid, staff.name, staff.position, staff.state, staff.city, staff.zip, staff.address1, staff.address2, staff.phone, airport.name AS aname FROM `staff`, `airport` WHERE homeAirport=aid AND (staff.name LIKE '" . $name . "%' OR staff.name LIKE '% " . $name . "%')";
+			    $sql        = "SELECT staff.sid, staff.name, staff.position, staff.state, staff.city, staff.zip, staff.address, staff.address2, staff.phone, airport.name AS aname FROM `staff`, `airport` WHERE homeAirport=aid AND (staff.name LIKE '" . $name . "%' OR staff.name LIKE '% " . $name . "%')";
 			    $result     = $conn->query($sql);
 			    while ($row = $result->fetch_assoc()) {
 			        echo ("<tr>");
