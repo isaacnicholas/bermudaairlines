@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php
+$servername = "localhost";
+$username   = "localuser";
+$password   = "tG88sAqC";
+$dbname     = "airline";
+$conn       = new mysqli($servername, $username, $password, $dbname);
+?>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
@@ -33,8 +40,8 @@
 		<div style="padding-bottom: 20px">
 			Is this a new Customer? <button class="btn btn-success" onclick="hideexisting()" type="button">Yes</button> <button class="btn btn-danger" onclick="showexisting()" type="button">No</button><br><br>
 		</div>
-		<div id="returning">
-			<label for="usr">Customer Name:</label> <input class="form-control" id="namesearch" type="text" onChange="lookforcustomers()">
+		<div id="returning" style="display: none">
+			<label for="usr">Customer Name:</label> <input class="form-control" id="namesearch" type="text" oninput="lookforcustomers()">
 			<div id="customerslist">
 			</div>
 		</div>
@@ -46,74 +53,26 @@
 				<h2>Select Flight</h2>
 			</div>
 			<div class="row">
-				<label class="col-sm-1" for="departureairport">Departure:</label>
+				<label class="col-sm-1">Departure:</label>
 				<div class="col-sm-3">
-					<select class="form-control" id="departureairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
+					<select class="form-control" id="departureairport" onChange="updateArrival()">
+						<?php
+					$sql    = "SELECT aid, name FROM airport";
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
+					}
+					?>
 					</select>
-				</div><label class="control-label col-sm-1" for="arrivalairport">Arrival:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="arrivalairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
-					</select>
-				</div><label class="col-sm-2" for="Datepicker2">Date:</label>
+				</div><label class="control-label col-sm-1">Arrival:</label>
+				<div class="col-sm-3" id="arrivalairport">
+				</div><label class="col-sm-2">Date:</label>
 				<div class="col-sm-2">
-					<input id="Datepicker2" type="text">
+					<input class="form-control" id="date" name="date" type="date">
 				</div>
 			</div>Click on a price to book a ticket
-			<table border="1" width="100%">
-				<tbody>
-					<tr>
-						<th scope="col">Departure Date</th>
-						<th scope="col">Departure Time</th>
-						<th scope="col">Departure Airport</th>
-						<th scope="col">Departure Gate</th>
-						<th scope="col">Arrival Date</th>
-						<th scope="col">Arrival Time</th>
-						<th scope="col">Arrival Airport</th>
-						<th scope="col">Arrival Gate</th>
-						<th scope="col">Plane Type</th>
-						<th scope="col">Economy Cost</th>
-						<th scope="col">First Class Cost</th>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-					</tr>
-				</tbody>
-			</table>
+			<div id="options">
+			</div>
 		</div>
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
@@ -167,20 +126,68 @@
 	</nav>
 	<script>
 		<?php
-			if($_GET["cid"]){
-					echo("start(".$_GET["cid"].")");
+			if(isset($_GET["cid"])){
+					echo("start(".$_GET["cid"].");");
+			}else{
+				echo('newcustomer();');
 			}
 		?>
-		function start(cid){
-			selectNumber(cid);
-			updatecustomers(cid);
+		function start(name){
+			selectNumber(name);
+			updatecustomers();
 		}
-		 var cid=0;
+		 var cid;
 	       function selectNumber(number){
 	           cid=number;
 	           updatecustomers(number);
 	       }
-	       function updatecustomers(cid){
+		function updateArrival(){
+			value = document.getElementById("departureairport").value;
+			runarrival(value);
+		}
+		updateArrival();
+		function findFlights(){
+			departureid = document.getElementById("departureairport").value;
+			arrivalid = document.getElementById("arrival").value;
+			date = document.getElementById("date").value;
+			runflights(departureid, arrivalid, date);
+		}
+		
+		function runarrival(aid){
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("arrivalairport").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "arrival.php?aid="+aid, true);
+	 xhttp.send();
+		}
+		function runflights(departureid, arrivalid, date){
+			alert(cid);
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("options").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "flights.php?dep="+departureid+"&arr="+arrivalid+"&date="+date+"&cid="+cid, true);
+	 xhttp.send();}
+	       function updatecustomers(){
 	           var xhttp;
 	 if (window.XMLHttpRequest) {
 	   // code for modern browsers
@@ -242,6 +249,7 @@
 	           $("#returning").slideUp();
 	           newcustomer();
 	       }
+			
 	</script>
 </body>
 </html>

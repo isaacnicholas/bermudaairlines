@@ -6,7 +6,7 @@ $dbname = "airline";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sid=$_GET["sid"];
 	$sql="SELECT staff.sid, staff.name, staff.position, staff.dob, staff.sex, staff.weight, 
-	staff.state, staff.city, staff.zip, staff.address1, staff.address2, staff.phone, staff.email, staff.homeAirport, airport.name AS aname FROM `staff`, `airport` WHERE staff.homeAirport=airport.aid AND staff.sid=".$sid;
+	staff.state, staff.city, staff.zip, staff.addreass1, staff.address2, staff.phone, staff.email, staff.homeAirport, airport.name AS aname FROM `staff`, `airport` WHERE staff.homeAirport=airport.aid AND staff.sid=".$sid;
 	$result=$conn->query($sql);
 	$row = $result->fetch_assoc();
 	?>
@@ -62,7 +62,7 @@ $dbname = "airline";
 			<div class="form-group">
 				<label class="control-label col-sm-1">Address Line 1:</label>
 				<div class="col-sm-11">
-					<input class="form-control" name="address1" type="text" value="<?php echo($row["address"])?>">
+					<input class="form-control" name="address" type="text" value="<?php echo($row["address"])?>">
 				</div>
 			</div>
 			<div class="form-group">

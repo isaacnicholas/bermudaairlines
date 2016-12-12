@@ -11,11 +11,11 @@ $password = "tG88sAqC";
 $dbname = "airline";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$cid=$_GET["cid"];
-	$sql="SELECT c.cid, c.name, c.dob, c.sex, c.weight, c.state, c.city, c.zip, c.address, c.address2, c.phone, c.email, a.name, c.payment, c.diet FROM `customers` c, `airport` a WHERE 1 AND  c.custHome=a.aid AND c.cid=".$cid;
+	$sql="SELECT c.cid, c.name, c.dob, c.sex, c.weight, c.state, c.city, c.zip, c.address, c.address2, c.phone, c.email, a.name as aname, c.custHome, c.payment, c.diet FROM `customers` c, `airport` a WHERE 1 AND  c.custHome=a.aid AND c.cid=".$cid;
 	$result=$conn->query($sql);
 	$row = $result->fetch_assoc();
 	?>
-<body><form class="form-horizontal" action="submitnew.php" method="post">
+<body><form class="form-horizontal" action="submitupdate.php?cid=<?php echo($cid)?>" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-1" >Name:</label>
 				<div class="col-sm-11">
@@ -231,7 +231,7 @@ $dbname = "airline";
 							$result=$conn->query($sql);
 							while($row2 = $result->fetch_assoc()){
 								echo("<option value=".$row2['aid']);
-								if(!strcmp($row['homeAirport'],$row2['aid'])){
+								if(!strcmp($row['custHome'],$row2['aid'])){
 									echo(" selected=\"\"");
 								}
 								echo(">");

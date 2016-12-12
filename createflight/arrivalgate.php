@@ -1,4 +1,4 @@
-<select class="form-control" name="arrive">
+<select class="form-control" name="arrivegate">
 <?php
 $servername = "localhost";
 $username   = "localuser";

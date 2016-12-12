@@ -20,79 +20,19 @@
   <body style="padding-top: 70px">
   <div class="container">
   	<h2>Check In</h2>
-    <label for="usr">Customer Name:<br>
-    </label>
-    <input class="form-control" id="namesearch" type="text">
-  	<div class="radio">
-				<table border="1" width="100%">
-					<tbody>
-						<tr>
-							<th scope="col">Name</th>
-							<th scope="col">Home Airport</th>
-							<th scope="col">Address</th>
-							<th scope="col">Phone Number</th>
-						</tr>
-						<tr>
-							<td><label><input name="optradio" type="radio">My Name Goes Here</label></td>
-							<td>Home Airport</td>
-							<td>Address</td>
-							<td>1021021022</td>
-						</tr>
-					</tbody>
-				</table>
-	</div>
+
+    <label for="usr">Customer Name:</label> <input class="form-control" id="namesearch" type="text" oninput="lookforcustomers()">
+  	<div id="customerslist">
+			</div>
 	  <h3>Customer's Flights:</h3>
-	  <div class="radio">
-				<table border="1" width="100%">
-					<tbody>
-						<tr>
-							<th scope="col">Departure Airport</th>
-							<th scope="col">Departure Time</th>
-							<th scope="col">Arrival Airport</th>
-							<th scope="col">Arrival Time</th>
-						</tr>
-						<tr>
-							<td><label><input name="optradio" type="radio">Airport 1</label></td>
-							<td>Date</td>
-							<td>Airport 2</td>
-							<td>Date</td>
-						</tr>
-					</tbody>
-				</table>
+	  <div id="flights">
+				
 	</div>
-			Departure Airport:<br>
-			Departure Gate:<br>
-			Departure Date:<br>
-			Departure Time:<br>
-			Arrival Airport:<br>
-			Arrival Gate:<br>
-			Arrival Time:<br>
-			Arrival Time:<br>
-			Airport:<br>
-			Seat Number:<br>
-			Cost: $134<br>
-			Luggage Items:
+		<div id="flightinfo">
+	  </div>
 			
 	  <h3>Add Luggage</h3>
-	  <div class="row">
-		  <div class="col-sm-1">Luggage Type</div>
-		  <div class="col-sm-2">
-					<select class="form-control" id="sex">
-						<option>
-							Carry-On
-						</option>
-						<option>
-							Stowaway
-						</option>
-					</select>
-					</div><label class="control-label col-sm-1" for="price">Price:</label>
-				<div class="col-sm-2">
-					<input id="price" type="number">
-					</div><label class="control-label col-sm-1" for="weight">Weight:</label>
-				<div class="col-sm-2">
-					<input id="price" type="weight">
-				</div>
-				<button class="btn btn-default">Submit</button>
+	  <div id="luggage">
 	  </div>
   </div>
   <nav class="navbar navbar-default navbar-fixed-top">
@@ -128,6 +68,98 @@
     </div>
     <!-- /.container-fluid -->
   </nav>
-	
+<script>
+	<?php
+			if(isset($_GET["tid"])){
+					echo("start(".$_GET["tid"].");");
+			}
+		?>
+		function start(name){
+			selectFlight(name);
+		}
+		 var cid;
+	       function selectNumber(number){
+	           cid=number;
+	           findflights(number);
+	       }
+	var tid;
+	function selectFlight(number){
+	           tid=number;
+	           runflight(number);
+				runluggage(number);
+	       }
+	       function runflight(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("flightinfo").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "updateflight.php?tid="+value, true);
+	 xhttp.send();
+	   }
+	function runluggage(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("luggage").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "addluggage.php?tid="+value, true);
+	 xhttp.send();
+	   }
+  function lookforcustomers(){
+	       var name=document.getElementById("namesearch").value;
+	       runsearch(name);
+	   }
+	       function runsearch(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("customerslist").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findcustomers.php?name="+value, true);
+	 xhttp.send();
+	   }
+	function findflights(){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("flights").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "findflights.php?cid="+cid, true);
+	 xhttp.send();
+	   }
+	  </script>	
   </body>
 </html>

@@ -1,4 +1,11 @@
-<form class="form-horizontal" action="submitnew.php" method="post">
+<?php
+$servername = "localhost";
+$username = "localuser";
+$password = "tG88sAqC";
+$dbname = "airline";
+	$conn = new mysqli($servername, $username, $password, $dbname);
+?>
+		<form class="form-horizontal" action="submitnew.php" method="post">
 			<div class="form-group">
 				<label class="control-label col-sm-1" >Name:</label>
 				<div class="col-sm-11">
@@ -12,10 +19,10 @@
 				</div><label class="control-label col-sm-1">Sex:</label>
 				<div class="col-sm-3">
 					<select class="form-control" name="sex">
-						<option>
+						<option value="M">
 							Male
 						</option>
-						<option>
+						<option value="F">
 							Female
 						</option>
 					</select>

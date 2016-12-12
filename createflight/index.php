@@ -49,7 +49,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 				</div><label class="control-label col-sm-1">Departure Gate:</label>
 				<div class="col-sm-1" id="departuregates">
 				</div><label class="control-label col-sm-1">Arrival Airport:</label>
-				<div class="col-sm-1">
+				<div class="col-sm-3">
 					<select class="form-control" name="arrivalairport" id="arrivalairport" onChange="getArriveGates()">
 					<?php
 					$sql    = "SELECT aid, name FROM airport";
@@ -80,11 +80,11 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 				<div class="col-sm-2"><div class="input-group">
 					<span class="input-group-addon">
 						  $</span>
-					<input class="form-control" name="economy" type="number">
+					<input class="form-control" name="economy" type="number" step="any">
 					</div></div><label class="control-label col-sm-2">First Class Price:</label>
 				<div class="col-sm-2"><div class= "input-group">
 					<span class="input-group-addon">
-						  $</span><input class="form-control" name="firstclass" type="number">
+						  $</span><input class="form-control" name="firstclass" type="number" step="any">
 					</div></div>
 			</div>
 			<div class="form-group">
@@ -96,7 +96,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 					<input class="form-control" type="time" name="departtime">
 				</div><label class="control-label col-sm-1" for="steward">Arrival Date:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="text" name="arrivedate">
+					<input class="form-control" type="date" name="arrivedate">
 				</div><label class="control-label col-sm-1" for="steward2">Arrival Time:</label>
 				<div class="col-sm-2">
 					<input class="form-control" type="time" name="arrivedate">

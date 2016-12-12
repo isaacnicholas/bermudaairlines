@@ -62,7 +62,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 		<div class="form-group">
 			<label class="control-label col-sm-1">Address Line 1:</label>
 			<div class="col-sm-11">
-				<input class="form-control" name="address1" type="text">
+				<input class="form-control" name="address" type="text">
 			</div>
 		</div>
 		<div class="form-group">

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<?php
+$servername = "localhost";
+$username   = "localuser";
+$password   = "tG88sAqC";
+$dbname     = "airline";
+$conn       = new mysqli($servername, $username, $password, $dbname);
+	?>
 	<meta charset="utf-8">
 	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta content="width=device-width, initial-scale=1" name="viewport">
@@ -21,262 +28,29 @@
 		<h2>Flight Status</h2>
 		<h4>Search for a flight</h4><br>
 		<div class="row">
-			<label class="control-label col-sm-2" for="departureairport">Departure Airport:</label>
-			<div class="col-sm-3">
-				<select class="form-control" id="departureairport">
-					<option>
-						Airport 1
-					</option>
-					<option>
-						Airport 2
-					</option>
-				</select>
-			</div><label class="control-label col-sm-2" for="arrivalairport">Arrival Airport:</label>
-			<div class="col-sm-3">
-				<select class="form-control" id="arrivalairport">
-					<option>
-						Airport 1
-					</option>
-					<option>
-						Airport 2
-					</option>
-				</select>
+				<label class="col-sm-1">Departure:</label>
+				<div class="col-sm-3">
+					<select class="form-control" id="departureairport" onChange="updateArrival()">
+						<?php
+					$sql    = "SELECT aid, name FROM airport";
+					$result = $conn->query($sql);
+					while ($row = $result->fetch_assoc()) {
+					    echo ("<option value=\"" . $row["aid"] . "\">" . $row["name"] . "</option>");
+					}
+					?>
+					</select>
+				</div><label class="control-label col-sm-1">Arrival:</label>
+				<div class="col-sm-3" id="arrivalairport">
+				</div><label class="col-sm-2">Date:</label>
+				<div class="col-sm-2">
+					<input class="form-control" id="date" name="date" type="date">
+				</div>
+		<div id="options">
 			</div>
-		</div>
-		<table border="1" width="100%">
-			<tbody>
-				<tr>
-					<th scope="col">Departure Date</th>
-					<th scope="col">Departure Time</th>
-					<th scope="col">Departure Airport</th>
-					<th scope="col">Departure Gate</th>
-					<th scope="col">Arrival Date</th>
-					<th scope="col">Arrival Time</th>
-					<th scope="col">Arrival Airport</th>
-					<th scope="col">Arrival Gate</th>
-					<th scope="col">Plane Type</th>
-					<th scope="col">Economy Cost</th>
-					<th scope="col">First Class Cost</th>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-			</tbody>
-		</table>
 		<h4>Current Status</h4>
-		<div class="row">
-			<div class="col-sm-2">
-				Update Status
-			</div><input class="col-sm-6" type="text">
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				Passenger Statistics
-				<table border="1" width="100%">
-					<tbody>
-						<tr>
-							<th scope="col">Location</th>
-							<th scope="col"># Checked In</th>
-							<th scope="col"># Booked</th>
-							<th scope="col"># Possible</th>
-						</tr>
-						<tr>
-							<td>First Class</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Economy</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-					</tbody>
-				</table>
+		<div id="status">
 			</div>
-			<div class="col-sm-6">
-				Weight Statistics
-				<table border="1" width="100%">
-					<tbody>
-						<tr>
-							<th scope="col">Item</th>
-							<th scope="col">Total Number</th>
-							<th scope="col">Total Weight</th>
-						</tr>
-						<tr>
-							<td>Passengers</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Carry-On</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Checked</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr>
-							<td>Total</td>
-							<td>N/A</td>
-							<td>&nbsp;</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-		<h4>Update Info</h4>
-		<form class="form-horizontal">
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="departureairport">Departure Airport:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="departureairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="departuregate">Departure Gate:</label>
-				<div class="col-sm-1">
-					<select class="form-control" id="departuregate">
-						<option>
-							1
-						</option>
-						<option>
-							2
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="arrivalairport">Arrival Airport:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="arrivalairport">
-						<option>
-							Airport 1
-						</option>
-						<option>
-							Airport 2
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="arrivalegate">Arrival Gate:</label>
-				<div class="col-sm-1">
-					<select class="form-control" id="arrivalegate">
-						<option>
-							1
-						</option>
-						<option>
-							2
-						</option>
-					</select>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="plane">Plane:</label>
-				<div class="col-sm-3">
-					<select class="form-control" id="plane">
-						<option>
-							Plane 1
-						</option>
-						<option>
-							Plane 2
-						</option>
-					</select>
-				</div><label class="control-label col-sm-2" for="economy">Economy Price:</label>
-				<div class="col-sm-2">
-					<input class="form-control" id="economy" type="number">
-				</div><label class="control-label col-sm-2" for="firstclass">First Class Price:</label>
-				<div class="col-sm-2">
-					<input class="form-control" id="firstclass" type="number">
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="pilot">Departure Date:</label>
-				<div class="col-sm-2">
-					<input id="Datepicker1" type="text">
-				</div><label class="control-label col-sm-1" for="copilot">Departure Time:</label>
-				<div class="col-sm-2">
-					<input type="time">
-				</div><label class="control-label col-sm-1" for="steward">Arrival Date:</label>
-				<div class="col-sm-2">
-					<input id="Datepicker2" type="text">
-				</div><label class="control-label col-sm-1" for="steward2">Arrival Time:</label>
-				<div class="col-sm-2">
-					<input type="time">
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<h3>Staff</h3>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-1" for="pilot">Pilot:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="pilot">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="copilot">Co-Pilot:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="copilot">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="steward">Steward:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="steward">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div><label class="control-label col-sm-1" for="steward2">Steward 2:</label>
-				<div class="col-sm-2">
-					<select class="form-control" id="steward2">
-						<option>
-							Me
-						</option>
-						<option>
-							You
-						</option>
-					</select>
-				</div>
-			</div><button class="btn btn-primary" type="submit">Submit</button>
-		</form>
+		
 	</div>
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -327,5 +101,159 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	<script>
+		function updateArrival(){
+			value = document.getElementById("departureairport").value;
+			runarrival(value);
+		}
+		updateArrival();
+		function findFlights(){
+			departureid = document.getElementById("departureairport").value;
+			arrivalid = document.getElementById("arrival").value;
+			date = document.getElementById("date").value;
+			runflights(departureid, arrivalid, date);
+		}
+		var fid;
+		function selectNumber(number){
+			fid=number;
+			getInfo();
+			getDepartGates();
+			getArriveGates();
+		}
+		function updateStatus(){
+			alert(document.getElementById("status").value);
+			status=document.getElementById("status").value;
+			sendStatus(status);
+		}
+		
+		function runarrival(aid){
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("arrivalairport").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "arrival.php?aid="+aid, true);
+	 xhttp.send();
+		}
+		function sendStatus(status){
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	   }
+	 };
+	 xhttp.open("GET", "sendstatus.php?fid="+fid+"&status="+status, true);
+	 xhttp.send();
+		}
+		function runflights(departureid, arrivalid, date){
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("options").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "flights.php?dep="+departureid+"&arr="+arrivalid+"&date="+date, true);
+	 xhttp.send();}
+		function getInfo(){
+			var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("status").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "flightinfo.php?fid="+fid, true);
+	 xhttp.send();
+		}
+		function getDepartGates(){
+			var value=document.getElementById("departureairport").value;
+			alert (document.getElementById("arrivalairport").value)
+			populatedepart(value);
+			populatestaff(value);
+		}
+		function getArriveGates(){
+			
+			var value=document.getElementById("arrivalairport").value;
+			populatearrival(value);
+		}
+			function populatedepart(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("departuregates").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "departuregate.php?aid="+value+"&fid="+fid, true);
+	 xhttp.send();
+	       }
+			function populatearrival(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("arrivalgates").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "arrivalgate.php?aid="+value+"&fid="+fid, true);
+	 xhttp.send();
+	       }
+		function populatestaff(value){
+	           var xhttp;
+	 if (window.XMLHttpRequest) {
+	   // code for modern browsers
+	   xhttp = new XMLHttpRequest();
+	   } else {
+	   // code for IE6, IE5
+	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	 }
+	 xhttp.onreadystatechange = function() {
+	   if (this.readyState == 4 && this.status == 200) {
+	     document.getElementById("staff").innerHTML = this.responseText;
+	   }
+	 };
+	 xhttp.open("GET", "staff.php?aid="+value+"&fid="+fid, true);
+	 xhttp.send();
+	       }
+		</script>
 </body>
 </html>
