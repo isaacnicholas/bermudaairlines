@@ -171,7 +171,6 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 	 xhttp.send();
 		}
 		function runflights(departureid, arrivalid, date){
-			alert(cid);
 			var xhttp;
 	 if (window.XMLHttpRequest) {
 	   // code for modern browsers

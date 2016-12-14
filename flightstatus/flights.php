@@ -39,8 +39,8 @@ while ($row = $result->fetch_assoc()) {
 	echo("<td>" . $row['aaname'] . "</td>");
 	echo("<td>" . $row['agname'] . $row['agconcourse'] . "</td>");
 	echo("<td>" . $row['make'] ." ". $row['model'] . "</td>");
-	echo("<td>".$row['firstClassPrice']."</td>");
-	echo("<td>".$row['economyPrice']."</td>");
+	echo("<td>$".$row['firstClassPrice']."</td>");
+	echo("<td>$".$row['economyPrice']."</td>");
 	echo("<td><button class=\"btn btn-primary\" type=\"button\" id=\"button" . $row['fid'] . "\" onClick=\"selectNumber(" . $row['fid'] . ")\">Select</button>");
 }
 ?>

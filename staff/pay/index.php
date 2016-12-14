@@ -81,32 +81,7 @@
 		var sid=0;
 	       function selectStaffNumber(number){
 	           sid=number;
-	           searchpay(number);
-	       }
-		var payid=0;
-	       function selectPayNumber(number){
-	           payid=number;
-			   if(payid==0){
-				   newpay();
-			   }
 	           updatepay(number);
-	       }
-		function searchpay(sid){
-	           var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("pay").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "findpay.php?sid="+sid, true);
-	 xhttp.send();
 	       }
 		function updatepay(sid){
 	           var xhttp;
@@ -123,23 +98,6 @@
 	   }
 	 };
 	 xhttp.open("GET", "update.php?sid="+sid, true);
-	 xhttp.send();
-	       }
-		function newpay(){
-	           var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("form").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "new.php?sid="+sid, true);
 	 xhttp.send();
 	       }
 		function lookforstaff(){

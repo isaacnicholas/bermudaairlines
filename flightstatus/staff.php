@@ -31,6 +31,7 @@ $row=$result->fetch_assoc();
 					<select class="form-control" name="copilot">
 						<?php
 						$sql="SELECT name, sid FROM staff WHERE homeAirport = ".$aid." AND position = 'copilot'";
+						$result = $conn->query($sql);
 						while ($row2 = $result->fetch_assoc()) {
 								if(!strcmp($row2["sid"],$row["copilotID"])){
 						echo("<option value='".$row2["sid"]."' selected=\"\">");

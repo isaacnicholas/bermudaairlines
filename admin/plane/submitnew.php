@@ -4,7 +4,7 @@ $username   = "localuser";
 $password   = "tG88sAqC";
 $dbname     = "airline";
 $conn       = new mysqli($servername, $username, $password, $dbname);
-$sql        = "INSERT INTO `airplanes`(`make`, `model`, `status`, `numFirstClass`, `numEconomy`) VALUES (" . $_POST["make"] . "," . $_POST["model"] . "," . $_POST["status"] . "," . $_POST["firstclass"] . "," . $_POST["economy"] . ")";
+$sql        = "INSERT INTO `airplanes`(`make`, `model`, `status`, `numFirstClass`, `numEconomy`) VALUES ('" . $_POST["make"] . "','" . $_POST["model"] . "','" . $_POST["status"] . "'," . $_POST["firstclass"] . "," . $_POST["economy"] . ")";
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
     header('Location: https://vps101733.vps.ovh.ca/bermudaair/admin/plane/');

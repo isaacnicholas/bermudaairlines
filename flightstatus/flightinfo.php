@@ -8,7 +8,7 @@ $fid=$_GET['fid'];
 ?>
 		<div class="row">
 			<div class="col-sm-2">
-				Update Status
+				Update Status (Updated Automatically)
 			</div><input class="col-sm-6 form-control" type="text" id="status" onChange="updateStatus()" value="<?php $sql="SELECT status FROM `flights` WHERE fid=".$fid;
 								$result = $conn->query($sql);
 								$row = $result->fetch_assoc();
@@ -137,7 +137,7 @@ $fid=$_GET['fid'];
 			<div class="form-group">
 				<label class="control-label col-sm-1">Departure Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" name="departureairport" id="departureairport" onChange="getDepartGates()">
+					<select class="form-control" name="departureairport" id="departureairport2" onChange="getDepartGates()">
 					<?php
 					$sql    = "SELECT aid, name FROM airport";
 					$result = $conn->query($sql);
@@ -154,7 +154,7 @@ $fid=$_GET['fid'];
 				<div class="col-sm-1" id="departuregates">
 				</div><label class="control-label col-sm-1">Arrival Airport:</label>
 				<div class="col-sm-3">
-					<select class="form-control" name="arrivalairport" id="arrivalairport" onChange="getArriveGates()">
+					<select class="form-control" name="arrivalairport" id="arrivalairport2" onChange="getArriveGates()">
 					<?php
 					$sql    = "SELECT aid, name FROM airport";
 					$result = $conn->query($sql);

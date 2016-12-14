@@ -5,7 +5,7 @@ $password = "tG88sAqC";
 $dbname = "airline";
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	$sid=$_GET["sid"];
-	$sql="SELECT * FROM `payroll` WHERE payID=".$sid;
+	$sql="SELECT * FROM `payroll` WHERE sid=".$sid;
 	$result=$conn->query($sql);
 	$row = $result->fetch_assoc();
 	?>

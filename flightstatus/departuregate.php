@@ -13,7 +13,7 @@ $row = $result->fetch_assoc();
 $sql="SELECT * FROM `gates` WHERE airport=".$aid;
 $result = $conn->query($sql);
 while ($row2 = $result->fetch_assoc()) {
-		if(!strcmp($row["depGate"],$row2["aid"])){
+		if(!strcmp($row["depGate"],$row2["gname"])){
 		echo ("<option value=".$row2["gname"]." selected=\"\">" . $row2["gname"] . $row2["concourse"] . "</option>");
 		}else{
 			echo ("<option value=".$row2["gname"].">" . $row2["gname"] . $row2["concourse"] . "</option>");

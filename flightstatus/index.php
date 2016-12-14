@@ -40,7 +40,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 					?>
 					</select>
 				</div><label class="control-label col-sm-1">Arrival:</label>
-				<div class="col-sm-3" id="arrivalairport">
+				<div class="col-sm-3" id="arrival">
 				</div><label class="col-sm-2">Date:</label>
 				<div class="col-sm-2">
 					<input class="form-control" id="date" name="date" type="date">
@@ -48,7 +48,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 		<div id="options">
 			</div>
 		<h4>Current Status</h4>
-		<div id="status">
+		<div id="flightstatus">
 			</div>
 		
 	</div>
@@ -102,158 +102,166 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 		</div><!-- /.container-fluid -->
 	</nav>
 	<script>
-		function updateArrival(){
-			value = document.getElementById("departureairport").value;
-			runarrival(value);
+function updateArrival() {
+	value = document.getElementById("departureairport").value;
+	runarrival(value);
+}
+updateArrival();
+
+function findFlights() {
+	departureid = document.getElementById("departureairport").value;
+	arrivalid = document.getElementById("arrivalairport").value;
+	date = document.getElementById("date").value;
+	runflights(departureid, arrivalid, date);
+}
+var fid;
+
+function selectNumber(number) {
+	fid = number;
+	getInfo();
+}
+
+function updateStatus() {
+	status = document.getElementById("status").value;
+	sendStatus(status);
+}
+
+function runarrival(aid) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("arrival").innerHTML = this.responseText;
 		}
-		updateArrival();
-		function findFlights(){
-			departureid = document.getElementById("departureairport").value;
-			arrivalid = document.getElementById("arrival").value;
-			date = document.getElementById("date").value;
-			runflights(departureid, arrivalid, date);
+	};
+	xhttp.open("GET", "arrival.php?aid=" + aid, true);
+	xhttp.send();
+}
+
+function sendStatus(status) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {}
+	};
+	xhttp.open("GET", "sendstatus.php?fid=" + fid + "&status=" + status, true);
+	xhttp.send();
+}
+
+function runflights(departureid, arrivalid, date) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("options").innerHTML = this.responseText;
 		}
-		var fid;
-		function selectNumber(number){
-			fid=number;
-			getInfo();
-			getDepartGates();
-			getArriveGates();
+	};
+	xhttp.open("GET", "flights.php?dep=" + departureid + "&arr=" + arrivalid + "&date=" + date, true);
+	xhttp.send();
+}
+
+function getInfo() {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("flightstatus").innerHTML = this.responseText;
+				getDepartGates();
+				getArriveGates();
 		}
-		function updateStatus(){
-			alert(document.getElementById("status").value);
-			status=document.getElementById("status").value;
-			sendStatus(status);
+	};
+	xhttp.open("GET", "flightinfo.php?fid=" + fid, true);
+	xhttp.send();
+}
+
+function getDepartGates() {
+	var value = document.getElementById("departureairport2").value;
+	populatedepart(value);
+	populatestaff(value);
+}
+
+function getArriveGates() {
+	var value = document.getElementById("arrivalairport2").value;
+	populatearrival(value);
+}
+
+function populatedepart(value) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("departuregates").innerHTML = this.responseText;
 		}
-		
-		function runarrival(aid){
-			var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("arrivalairport").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "arrival.php?aid="+aid, true);
-	 xhttp.send();
+	};
+	xhttp.open("GET", "departuregate.php?aid=" + value + "&fid=" + fid, true);
+	xhttp.send();
+}
+
+function populatearrival(value) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("arrivalgates").innerHTML = this.responseText;
 		}
-		function sendStatus(status){
-			var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	   }
-	 };
-	 xhttp.open("GET", "sendstatus.php?fid="+fid+"&status="+status, true);
-	 xhttp.send();
+	};
+	xhttp.open("GET", "arrivalgate.php?aid=" + value + "&fid=" + fid, true);
+	xhttp.send();
+}
+
+function populatestaff(value) {
+	var xhttp;
+	if (window.XMLHttpRequest) {
+		// code for modern browsers
+		xhttp = new XMLHttpRequest();
+	} else {
+		// code for IE6, IE5
+		xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			document.getElementById("staff").innerHTML = this.responseText;
 		}
-		function runflights(departureid, arrivalid, date){
-			var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("options").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "flights.php?dep="+departureid+"&arr="+arrivalid+"&date="+date, true);
-	 xhttp.send();}
-		function getInfo(){
-			var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("status").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "flightinfo.php?fid="+fid, true);
-	 xhttp.send();
-		}
-		function getDepartGates(){
-			var value=document.getElementById("departureairport").value;
-			alert (document.getElementById("arrivalairport").value)
-			populatedepart(value);
-			populatestaff(value);
-		}
-		function getArriveGates(){
-			
-			var value=document.getElementById("arrivalairport").value;
-			populatearrival(value);
-		}
-			function populatedepart(value){
-	           var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("departuregates").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "departuregate.php?aid="+value+"&fid="+fid, true);
-	 xhttp.send();
-	       }
-			function populatearrival(value){
-	           var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("arrivalgates").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "arrivalgate.php?aid="+value+"&fid="+fid, true);
-	 xhttp.send();
-	       }
-		function populatestaff(value){
-	           var xhttp;
-	 if (window.XMLHttpRequest) {
-	   // code for modern browsers
-	   xhttp = new XMLHttpRequest();
-	   } else {
-	   // code for IE6, IE5
-	   xhttp = new ActiveXObject("Microsoft.XMLHTTP");
-	 }
-	 xhttp.onreadystatechange = function() {
-	   if (this.readyState == 4 && this.status == 200) {
-	     document.getElementById("staff").innerHTML = this.responseText;
-	   }
-	 };
-	 xhttp.open("GET", "staff.php?aid="+value+"&fid="+fid, true);
-	 xhttp.send();
-	       }
+	};
+	xhttp.open("GET", "staff.php?aid=" + value + "&fid=" + fid, true);
+	xhttp.send();
+}
 		</script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<select class="form-control" id="arrival" onChange="findFlights()">
+<select class="form-control" id="arrivalairport" onChange="findFlights()">
 <?php
 $aid=$_GET["aid"];
 $servername = "localhost";
