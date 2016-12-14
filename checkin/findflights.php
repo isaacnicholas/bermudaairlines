@@ -22,7 +22,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 			        echo ("<tr>");
 			        echo ("<td>" . $row['daname'] . "</td>");
 			        echo ("<td>" . $row['depDate'] ." ". $row['depTime'] . "</td>");
-			        echo ("<td>" . $row['aaname'] . "</td>");
+			        echo ("<td>" . $row['arname'] . "</td>");
 			        echo ("<td>" . $row['arrDate'] ." ". $row['arrTime'] . "</td>");
 					if($row['checkedIn']){
 						echo("<td> Yes </td>");

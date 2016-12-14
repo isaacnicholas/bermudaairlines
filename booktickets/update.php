@@ -32,7 +32,7 @@ $dbname = "airline";
 						<option value="M" <?php if(!strcmp($row["sex"],"M")){echo ("selected=\"\"");}?>>
 							Male
 						</option>
-						<option value="F" <?php if(!strcmp($row["position"],"F")){echo ("selected=\"\"");}?>>
+						<option value="F" <?php if(!strcmp($row["sex"],"F")){echo ("selected=\"\"");}?>>
 							Female
 						</option>
 					</select>

@@ -7,7 +7,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 $fid=$_GET['fid'];
 ?>
 		<div class="row">
-			<div class="col-sm-2">
+			<div>
 				Update Status (Updated Automatically)
 			</div><input class="col-sm-6 form-control" type="text" id="status" onChange="updateStatus()" value="<?php $sql="SELECT status FROM `flights` WHERE fid=".$fid;
 								$result = $conn->query($sql);
@@ -211,7 +211,7 @@ $fid=$_GET['fid'];
 					<input class="form-control" type="date" name="arrivedate" value="<?php echo($row['arrDate']);?>">
 				</div><label class="control-label col-sm-1">Arrival Time:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="time" name="arrivedate" value="<?php echo($row['arrTime']);?>">
+					<input class="form-control" type="time" name="arrivetime" value="<?php echo($row['arrTime']);?>">
 				</div>
 			</div>
 			<div class="col-sm-12">

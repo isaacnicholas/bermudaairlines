@@ -13,10 +13,10 @@ $dbname = "airline";
 			<div class="form-group">
 				<label class="control-label col-sm-1">Wage:</label>
 				<div class="col-sm-3">
-					<input class="form-control" name="wage" type="number" value="<?php echo($row["wage"])?>">
+					<input class="form-control" name="wage" type="number" step="any" value="<?php echo($row["wage"])?>">
 				</div><label class="control-label col-sm-1">Hours:</label>
 				<div class="col-sm-3">
-					<input class="form-control" name="hours" type="number" value="<?php echo($row["hours"])?>">
+					<input class="form-control" name="hours" type="number" step="any" value="<?php echo($row["hours"])?>">
 				</div><label class="control-label col-sm-1">Time:</label>
 				<div class="col-sm-3">
 					<select class="form-control" name="time" id="hours">

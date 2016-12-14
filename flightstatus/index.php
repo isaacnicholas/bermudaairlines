@@ -43,7 +43,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 				<div class="col-sm-3" id="arrival">
 				</div><label class="col-sm-2">Date:</label>
 				<div class="col-sm-2">
-					<input class="form-control" id="date" name="date" type="date">
+					<input class="form-control" id="date" name="date" type="date" onChange="findFlights()">
 				</div>
 		<div id="options">
 			</div>

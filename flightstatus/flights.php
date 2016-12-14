@@ -24,7 +24,8 @@ $arr=$_GET['arr'];
 $dep=$_GET['dep'];
 $date=$_GET['date'];
 if($date){
-	$sql="SELECT f.fid, f.depDate, f.depTime, da.name as daname, dg.gname as dgname, dg.concourse as dgconcourse, f.arrDate, f.arrTime, aa.name as aaname, ag.gname as agname, ag.concourse agconcourse, f.pid, p.make, p.model, f.firstClassPrice, f.economyPrice FROM flights f, airport da, airport aa, gates dg, gates ag, airplanes p WHERE f.depLocationID=da.aid AND f.arrLocationID=aa.aid AND f.depGate=dg.gname AND f.arrGate=ag.gname AND f.depLocationID=dg.airport AND f.arrLocationID=ag.airport AND p.pid=f.pid AND f.depLocationID=".$dep." AND f.arrLocationID=".$arr." AND f.arrDate=".$date;
+	echo(date('Y-m-d',strtotime($date)));
+	$sql="SELECT f.fid, f.depDate, f.depTime, da.name as daname, dg.gname as dgname, dg.concourse as dgconcourse, f.arrDate, f.arrTime, aa.name as aaname, ag.gname as agname, ag.concourse agconcourse, f.pid, p.make, p.model, f.firstClassPrice, f.economyPrice FROM flights f, airport da, airport aa, gates dg, gates ag, airplanes p WHERE f.depLocationID=da.aid AND f.arrLocationID=aa.aid AND f.depGate=dg.gname AND f.arrGate=ag.gname AND f.depLocationID=dg.airport AND f.arrLocationID=ag.airport AND p.pid=f.pid AND f.depLocationID=".$dep." AND f.arrLocationID=".$arr." AND f.arrDate='".date('Y-m-d',strtotime($date))."'";
 }else{
 $sql="SELECT f.fid, f.depDate, f.depTime, da.name as daname, dg.gname as dgname, dg.concourse as dgconcourse, f.arrDate, f.arrTime, aa.name as aaname, ag.gname as agname, ag.concourse agconcourse, f.pid, p.make, p.model, f.firstClassPrice, f.economyPrice FROM flights f, airport da, airport aa, gates dg, gates ag, airplanes p WHERE f.depLocationID=da.aid AND f.arrLocationID=aa.aid AND f.depGate=dg.gname AND f.arrGate=ag.gname AND f.depLocationID=dg.airport AND f.arrLocationID=ag.airport AND p.pid=f.pid AND f.depLocationID=".$dep." AND f.arrLocationID=".$arr;}
 $result = $conn->query($sql);

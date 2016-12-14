@@ -18,7 +18,9 @@
 		<![endif]-->
   </head>
   <body style="padding-top: 70px">
-  <div class="container">Welcome to the homepage of Bermuda Airlines. This website was created as a collaboration between Isaac Nicholas and Christian Troelstrup as the Filal Project for EECS 341 at Case Western Resrve University. The code is available at GitHub <a href="https://github.com/isaacnicholas/bermudaairlines">here.</a></div>
+  
+	  <div class="container"><img src="logo.jpg" width="590" height="350" alt=""/>
+	  <p>Welcome to the homepage of Bermuda Airlines. This website was created as a collaboration between Isaac Nicholas and Christian Troelstrup as the Filal Project for EECS 341 at Case Western Resrve University. The code is available at GitHub <a href="https://github.com/isaacnicholas/bermudaairlines">here.</a></p></div>
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->

@@ -99,7 +99,7 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 					<input class="form-control" type="date" name="arrivedate">
 				</div><label class="control-label col-sm-1" for="steward2">Arrival Time:</label>
 				<div class="col-sm-2">
-					<input class="form-control" type="time" name="arrivedate">
+					<input class="form-control" type="time" name="arrivetime">
 				</div>
 			</div>
 			<div class="col-sm-12">

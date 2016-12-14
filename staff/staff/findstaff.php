@@ -28,7 +28,10 @@
 			        echo ("<td>" . $row['name'] . "</td>");
 			        echo ("<td>" . $row['aname'] . "</td>");
 			        echo ("<td>" . $row['position'] . "</td>");
-			        echo ("<td>" . $row['address1'] . " " . $row['address2'] . " " . $row['city'] . " " . $row['state'] . ", " . $row['zip'] . "</td>");
+			        echo ("<td>" . $row['address'] . " ");
+					if(strcmp($row['address2'],"NULL")){
+						echo($row['address2'] . " ");
+					}echo($row['city'] . ", " . $row['state'] . " " . $row['zip'] . "</td>");
 			        echo ("<td>" . $row['phone'] . "</td>");
 			        echo ("<td><button class=\"btn btn-primary\" type=\"button\" id=\"button" . $row['sid'] . "\" onClick=\"selectNumber(" . $row['sid'] . ")\">Select</button>");
 			        echo ("</tr>");
