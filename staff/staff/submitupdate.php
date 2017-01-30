@@ -10,7 +10,7 @@ $sql        = "UPDATE `staff` SET `name`='" . $_POST['name'] . "',`position`='" 
 "',`state`='" . $_POST['state'] . "',`city`='" . $_POST['city'] . "',`zip`='" . $_POST['zip'] . "',`address`='" . $_POST['address'] . "',`address2`='" . $_POST['address2'] . "',`phone`='" . $_POST['phone'] . "',`email`='" . $_POST['email'] . "',`homeAirport`='" . $_POST['homeairport'] . "' WHERE sid=" . $sid;
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-    header('Location: https://vps101733.vps.ovh.ca/bermudaair/staff/staff/');
+    header('Location: https://isaac-nicholas.com/bermudaair/staff/staff/');
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "Please go back and try again";

@@ -14,7 +14,7 @@ $sql = "INSERT INTO `flights`(pid,`depLocationID`,`pilotID`,`copilotID`,`stewID1
 }
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-	header('Location: https://vps101733.vps.ovh.ca/bermudaair/createflight/');
+	header('Location: https://isaac-nicholas.com/bermudaair/createflight/');
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 	echo "Please go back and try again";

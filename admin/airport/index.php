@@ -50,33 +50,33 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-				<button aria-expanded="false" class="navbar-toggle collapsed" data-target="#topFixedNavbar1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="https://vps101733.vps.ovh.ca/bermudaair">Bermuda Airlines</a>
+				<button aria-expanded="false" class="navbar-toggle collapsed" data-target="#topFixedNavbar1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="https://isaac-nicholas.com/bermudaair">Bermuda Airlines</a>
 			</div><!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="topFixedNavbar1">
 				<ul class="nav navbar-nav">
 					<li>
-						<a href="https://vps101733.vps.ovh.ca/bermudaair/booktickets">Book Tickets</a>
+						<a href="https://isaac-nicholas.com/bermudaair/booktickets">Book Tickets</a>
 					</li>
 					<li>
-						<a href="https://vps101733.vps.ovh.ca/bermudaair/createflight">Create Flight</a>
+						<a href="https://isaac-nicholas.com/bermudaair/createflight">Create Flight</a>
 					</li>
 					<li>
-						<a href="https://vps101733.vps.ovh.ca/bermudaair/checkin">Check In</a>
+						<a href="https://isaac-nicholas.com/bermudaair/checkin">Check In</a>
 					</li>
 					<li>
-						<a href="https://vps101733.vps.ovh.ca/bermudaair/flightstatus">Flight Status</a>
+						<a href="https://isaac-nicholas.com/bermudaair/flightstatus">Flight Status</a>
 					</li>
 					<li class="dropdown">
 						<a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Admin<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="https://vps101733.vps.ovh.ca/bermudaair/admin/plane">Add/Modify Plane</a>
+								<a href="https://isaac-nicholas.com/bermudaair/admin/plane">Add/Modify Plane</a>
 							</li>
 							<li>
-								<a href="https://vps101733.vps.ovh.ca/bermudaair/admin/airport">Add/Modify Airport</a>
+								<a href="https://isaac-nicholas.com/bermudaair/admin/airport">Add/Modify Airport</a>
 							</li>
 							<li>
-								<a href="https://vps101733.vps.ovh.ca/bermudaair/admin/gate">Add/Modify Gate</a>
+								<a href="https://isaac-nicholas.com/bermudaair/admin/gate">Add/Modify Gate</a>
 							</li>
 						</ul>
 					</li>
@@ -84,10 +84,10 @@ $conn       = new mysqli($servername, $username, $password, $dbname);
 						<a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">Staff<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li>
-								<a href="https://vps101733.vps.ovh.ca/bermudaair/staff/staff">Add/Modify Staff</a>
+								<a href="https://isaac-nicholas.com/bermudaair/staff/staff">Add/Modify Staff</a>
 							</li>
 							<li>
-								<a href="https://vps101733.vps.ovh.ca/bermudaair/staff/pay">Add/Modify Pay</a>
+								<a href="https://isaac-nicholas.com/bermudaair/staff/pay">Add/Modify Pay</a>
 							</li>
 						</ul>
 					</li>

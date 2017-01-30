@@ -40,19 +40,19 @@ while ($row = $result->fetch_assoc()) {
 	echo("<td>" . $row['aaname'] . "</td>");
 	echo("<td>" . $row['agname'] . $row['agconcourse'] . "</td>");
 	echo("<td>" . $row['make'] ." ". $row['model'] . "</td>");
-	$sql="(SELECT numFirstCLass -(SELECT COUNT(*) FROM tickets t WHERE t.class='First' AND t.fid=".$row['fid'].")FROM airplanes p WHERE ".$row['pid'].")";
+	$sql="SELECT (SELECT numFirstClass -(SELECT COUNT(*) as count FROM tickets t WHERE t.class='First' AND t.fid=".$row['fid'].")FROM airplanes p WHERE p.pid=".$row['pid'].") AS answer";
 	$result2 = $conn->query($sql);
 	$row2=$result2->fetch_assoc();
-	if($row2>0){
+	if($row2['answer']>"0"){
 		echo("<td><a href=\"buytickets.php?fid=".$row['fid']."&cid=".$cid."&class=f\" class=\"btn btn-default\">".$row['firstClassPrice']."</a></td>");
 	}
 	else{
 		echo( "<td>Sold Out</td>");
 	}
-	$sql="(SELECT numFirstCLass -(SELECT COUNT(*) FROM tickets t WHERE t.class='Economy' AND t.fid=".$row['fid'].")FROM airplanes p WHERE ".$row['pid'].")";
+	$sql="SELECT (SELECT numEconomy -(SELECT COUNT(*) FROM tickets t WHERE t.class='Economy' AND t.fid=".$row['fid'].")FROM airplanes p WHERE p.pid=".$row['pid'].") AS answer";
 	$result2 = $conn->query($sql);
 	$row2=$result2->fetch_assoc();
-	if($row2>0){
+	if($row2['answer']>"0"){
 		echo("<td><a href=\"buytickets.php?fid=".$row['fid']."&cid=".$cid."&class=e\" class=\"btn btn-default\">".$row['economyPrice']."</a></td>");
 	}
 	else{

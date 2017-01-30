@@ -18,7 +18,7 @@ $max=$row['MAX'];
 $sql        = "INSERT INTO `customers`(`name`, `dob`, `sex`, `weight`, `state`, `city`, `zip`, `address`, `address2`, `phone`, `email`, `custHome`, `payment`, `diet`) VALUES ('".$_POST['name']."','".$_POST['dob']."','".$_POST['sex']."','".$_POST['weight']."','".$_POST['state']."','".$_POST['city']."','".$_POST['zip']."','".$_POST['address1']."','".$_POST['address2']."','".$_POST['phone']."','".$_POST['email']."',".$_POST['homeairport'].",'".$_POST['payment']."','".$_POST['diet']."')";
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-    header('Location: https://vps101733.vps.ovh.ca/bermudaair/booktickets?cid='.$max);
+    header('Location: https://isaac-nicholas.com/bermudaair/booktickets?cid='.$max);
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "Please go back and try again";

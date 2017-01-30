@@ -20,7 +20,7 @@ $row = $result->fetch_assoc();
 }
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-    header('Location: https://vps101733.vps.ovh.ca/bermudaair/booktickets?cid='.$max);
+    header('Location: https://isaac-nicholas.com/bermudaair/booktickets?cid='.$max);
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "Please go back and try again";

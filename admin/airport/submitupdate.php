@@ -8,7 +8,7 @@ $aid        = $_GET["aid"];
 $sql        = "UPDATE `airport` SET `name`='" . $_POST["name"] . "',`state`='" . $_POST["state"] . "',`city`='" . $_POST["city"] . "',`zip`='" . $_POST["zip"] . "',`address`='" . $_POST["address"] . "',`phone`='" . $_POST["phone"] . "',`email`='" . $_POST["email"] . "' WHERE aid=" . $aid;
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
-    header('Location: https://vps101733.vps.ovh.ca/bermudaair/admin/airport/');
+    header('Location: https://isaac-nicholas.com/bermudaair/admin/airport/');
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "Please go back and try again";
